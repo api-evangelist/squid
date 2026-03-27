@@ -1,0 +1,38 @@
+aid: squid
+name: Squid
+description: >-
+  Squid is a high-performance caching and forwarding HTTP web proxy used for content caching, filtering, and access control.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Proxy
+  - Caching Proxy
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/squid/refs/heads/main/apis.yml
+created: '2026-03-27'
+modified: '2026-03-27'
+specificationVersion: '0.19'
+apis:
+  - aid: squid:squid
+    name: Squid
+    description: >-
+      Squid is a high-performance caching and forwarding HTTP web proxy used for content caching, filtering, and access control.
+    humanURL: http://www.squid-cache.org/
+    tags:
+      - Proxy
+      - Caching Proxy
+    properties:
+      - type: Documentation
+        url: http://www.squid-cache.org/Doc/
+      - type: Getting Started
+        url: http://www.squid-cache.org/Doc/config/
+common:
+  - type: Website
+    url: http://www.squid-cache.org/
+  - type: Documentation
+    url: http://www.squid-cache.org/Doc/
+  - type: GitHub Organization
+    url: https://github.com/squid-cache
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
