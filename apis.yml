@@ -5,8 +5,8 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Proxy
   - Caching Proxy
+  - Proxy
 url: >-
   https://raw.githubusercontent.com/api-evangelist/squid/refs/heads/main/apis.yml
 created: '2026-03-27'
@@ -19,8 +19,8 @@ apis:
       Squid is a high-performance caching and forwarding HTTP web proxy used for content caching, filtering, and access control.
     humanURL: http://www.squid-cache.org/
     tags:
-      - Proxy
       - Caching Proxy
+      - Proxy
     properties:
       - type: Documentation
         url: http://www.squid-cache.org/Doc/
