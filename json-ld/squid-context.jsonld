@@ -1,0 +1,60 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "squid": "http://www.squid-cache.org/vocab/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "nwk": "https://www.w3.org/ns/network-vocab#",
+
+    "CacheProxy": "schema:SoftwareApplication",
+    "CacheStatistics": "squid:CacheStatistics",
+    "CacheObject": "squid:CacheObject",
+    "Connection": "nwk:Connection",
+    "AccessControlList": "squid:ACL",
+
+    "squid_version": "schema:softwareVersion",
+    "start_time": {
+      "@id": "schema:startDate",
+      "@type": "xsd:dateTime"
+    },
+    "current_time": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "uptime_seconds": "squid:uptimeSeconds",
+
+    "cache_hits": "squid:cacheHits",
+    "hit_ratio": {
+      "@id": "squid:hitRatio",
+      "@type": "xsd:decimal"
+    },
+    "total": "schema:totalItems",
+    "memory": "squid:memoryHits",
+    "disk": "squid:diskHits",
+
+    "request_counts": "squid:requestCounts",
+    "byte_counts": "squid:byteCounts",
+    "bytes_from_clients": "squid:bytesFromClients",
+    "bytes_to_clients": "squid:bytesToClients",
+    "bytes_from_servers": "squid:bytesFromServers",
+    "bytes_to_servers": "squid:bytesToServers",
+
+    "memory_usage": "squid:memoryUsage",
+    "total_accounted": "squid:totalAccountedBytes",
+    "max_resident": "squid:maxResidentSetSize",
+    "current_resident": "squid:currentResidentSetSize",
+
+    "store_directory": "squid:storeDirectory",
+    "current_objects": "schema:numberOfItems",
+    "current_capacity": {
+      "@id": "squid:capacityUsed",
+      "@type": "xsd:decimal"
+    },
+
+    "client_addr": "schema:sender",
+    "method": "schema:httpMethod",
+    "url": "schema:url",
+    "elapsed_seconds": "squid:elapsedSeconds",
+    "cache_status": "squid:cacheStatus"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "title": "Squid Cache Statistics Structure",
+  "description": "Structure documentation for Squid cache statistics and performance data",
+  "version": "6.x",
+  "structures": [
+    {
+      "name": "CacheInfo",
+      "description": "General cache information returned by /squid-internal-mgr/info",
+      "fields": [
+        { "name": "squid_version", "type": "string", "description": "Squid version string" },
+        { "name": "start_time", "type": "datetime", "description": "Process start time" },
+        { "name": "current_time", "type": "datetime", "description": "Current server time" },
+        { "name": "uptime_seconds", "type": "integer", "description": "Process uptime in seconds" }
+      ]
+    },
+    {
+      "name": "CacheCounters",
+      "description": "Performance counters from /squid-internal-mgr/counters",
+      "fields": [
+        { "name": "client_http.requests", "type": "integer", "description": "Total client HTTP requests" },
+        { "name": "client_http.hits", "type": "integer", "description": "Client HTTP cache hits" },
+        { "name": "client_http.errors", "type": "integer", "description": "Client HTTP errors" },
+        { "name": "client_http.kbytes_in", "type": "integer", "description": "KB received from clients" },
+        { "name": "client_http.kbytes_out", "type": "integer", "description": "KB sent to clients" },
+        { "name": "server.all.requests", "type": "integer", "description": "Total origin server requests" },
+        { "name": "server.all.errors", "type": "integer", "description": "Origin server errors" },
+        { "name": "server.all.kbytes_in", "type": "integer", "description": "KB received from servers" },
+        { "name": "dns.lookups", "type": "integer", "description": "DNS lookups performed" },
+        { "name": "dns.hits", "type": "integer", "description": "DNS cache hits" }
+      ]
+    },
+    {
+      "name": "ConnectionInfo",
+      "description": "Active connection data from /squid-internal-mgr/connections",
+      "fields": [
+        { "name": "local_addr", "type": "string", "description": "Local address and port" },
+        { "name": "remote_addr", "type": "string", "description": "Remote address and port" },
+        { "name": "fd", "type": "integer", "description": "File descriptor number" },
+        { "name": "bytes_read", "type": "integer", "description": "Bytes read on this connection" },
+        { "name": "bytes_written", "type": "integer", "description": "Bytes written on this connection" },
+        { "name": "duration", "type": "number", "description": "Connection duration in seconds" }
+      ]
+    },
+    {
+      "name": "ActiveRequest",
+      "description": "Active request data from /squid-internal-mgr/active_requests",
+      "fields": [
+        { "name": "connection_fd", "type": "integer", "description": "Connection file descriptor" },
+        { "name": "client_addr", "type": "string", "description": "Client IP address" },
+        { "name": "method", "type": "string", "description": "HTTP method" },
+        { "name": "url", "type": "string", "description": "Request URL" },
+        { "name": "elapsed_seconds", "type": "number", "description": "Elapsed time since request started" },
+        { "name": "cache_status", "type": "string", "description": "TCP_HIT, TCP_MISS, TCP_TUNNEL, etc." }
+      ]
+    }
+  ]
+}

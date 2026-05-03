@@ -1,0 +1,351 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Squid Cache Manager API"
+  description: "Built-in Squid HTTP management interface exposing cache statistics, connections, and operational commands."
+  tags:
+    - Squid
+    - Caching Proxy
+    - Cache Manager
+    - HTTP Proxy
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SQUID_CACHEMGR_PASSWORD: SQUID_CACHEMGR_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: squid-cache-manager
+      baseUri: http://localhost:3128/squid-internal-mgr
+      description: "Squid cache manager internal management interface"
+      authentication:
+        type: basic
+        username: "cachemgr"
+        password: "{{SQUID_CACHEMGR_PASSWORD}}"
+      resources:
+        - name: cache-statistics
+          path: /info
+          description: "Cache information and statistics"
+          operations:
+            - name: get-cache-info
+              method: GET
+              description: "Get general cache information"
+              outputRawFormat: text
+              outputParameters:
+                - name: result
+                  type: string
+                  value: "$."
+        - name: counters
+          path: /counters
+          description: "Performance counters"
+          operations:
+            - name: get-cache-counters
+              method: GET
+              description: "Get detailed performance counters"
+              outputRawFormat: text
+              outputParameters:
+                - name: result
+                  type: string
+                  value: "$."
+        - name: statistics-5min
+          path: /5min
+          description: "5-minute rolling statistics"
+          operations:
+            - name: get-5min-statistics
+              method: GET
+              description: "Get 5-minute rolling statistics"
+              outputRawFormat: text
+              outputParameters:
+                - name: result
+                  type: string
+                  value: "$."
+        - name: statistics-60min
+          path: /60min
+          description: "60-minute rolling statistics"
+          operations:
+            - name: get-60min-statistics
+              method: GET
+              description: "Get 60-minute rolling statistics"
+              outputRawFormat: text
+              outputParameters:
+                - name: result
+                  type: string
+                  value: "$."
+        - name: utilization
+          path: /utilization
+          description: "Cache utilization metrics"
+          operations:
+            - name: get-cache-utilization
+              method: GET
+              description: "Get cache utilization statistics"
+              outputRawFormat: text
+              outputParameters:
+                - name: result
+                  type: string
+                  value: "$."
+        - name: memory
+          path: /mem
+          description: "Memory usage statistics"
+          operations:
+            - name: get-memory-usage
+              method: GET
+              description: "Get memory allocation and pool statistics"
+              outputRawFormat: text
+              outputParameters:
+                - name: result
+                  type: string
+                  value: "$."
+        - name: active-requests
+          path: /active_requests
+          description: "Active HTTP requests"
+          operations:
+            - name: get-active-requests
+              method: GET
+              description: "List all currently active HTTP requests"
+              outputRawFormat: text
+              outputParameters:
+                - name: result
+                  type: string
+                  value: "$."
+        - name: connections
+          path: /connections
+          description: "Active connections"
+          operations:
+            - name: get-connections
+              method: GET
+              description: "Get all active client and server connections"
+              outputRawFormat: text
+              outputParameters:
+                - name: result
+                  type: string
+                  value: "$."
+        - name: configuration
+          path: /config
+          description: "Squid configuration"
+          operations:
+            - name: get-cache-config
+              method: GET
+              description: "Get current Squid configuration"
+              outputRawFormat: text
+              outputParameters:
+                - name: result
+                  type: string
+                  value: "$."
+        - name: acl
+          path: /acl_list
+          description: "Access control lists"
+          operations:
+            - name: get-acl-list
+              method: GET
+              description: "Get all defined ACLs and their membership"
+              outputRawFormat: text
+              outputParameters:
+                - name: result
+                  type: string
+                  value: "$."
+        - name: objects
+          path: /objects
+          description: "Cached objects"
+          operations:
+            - name: get-cache-objects
+              method: GET
+              description: "List objects currently stored in the cache"
+              inputParameters:
+                - name: pattern
+                  in: query
+                  type: string
+                  required: false
+                  description: "URL pattern filter"
+              outputRawFormat: text
+              outputParameters:
+                - name: result
+                  type: string
+                  value: "$."
+        - name: operations
+          path: /reconfigure
+          description: "Operational commands"
+          operations:
+            - name: reconfigure-squid
+              method: GET
+              description: "Trigger Squid to reload configuration"
+              outputRawFormat: text
+              outputParameters:
+                - name: result
+                  type: string
+                  value: "$."
+            - name: rotate-log-files
+              method: GET
+              description: "Trigger Squid log file rotation"
+              outputRawFormat: text
+              outputParameters:
+                - name: result
+                  type: string
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: squid-cache-manager-api
+      resources:
+        - path: /v1/cache/info
+          name: cache-info
+          description: "Cache information and statistics"
+          operations:
+            - method: GET
+              name: get-cache-info
+              description: "Get general Squid cache information"
+        - path: /v1/cache/counters
+          name: cache-counters
+          description: "Performance counters"
+          operations:
+            - method: GET
+              name: get-cache-counters
+              description: "Get performance counters"
+        - path: /v1/cache/utilization
+          name: cache-utilization
+          description: "Cache utilization"
+          operations:
+            - method: GET
+              name: get-cache-utilization
+              description: "Get cache utilization metrics"
+        - path: /v1/cache/memory
+          name: memory
+          description: "Memory usage"
+          operations:
+            - method: GET
+              name: get-memory-usage
+              description: "Get memory allocation statistics"
+        - path: /v1/cache/connections
+          name: connections
+          description: "Active connections"
+          operations:
+            - method: GET
+              name: get-connections
+              description: "Get active connections"
+        - path: /v1/cache/objects
+          name: objects
+          description: "Cached objects"
+          operations:
+            - method: GET
+              name: get-cache-objects
+              description: "List cached objects"
+        - path: /v1/cache/config
+          name: configuration
+          description: "Cache configuration"
+          operations:
+            - method: GET
+              name: get-cache-config
+              description: "Get Squid configuration"
+
+    - type: mcp
+      port: 9100
+      namespace: squid-cache-manager-mcp
+      transport: http
+      tools:
+        - name: get-cache-info
+          description: "Get general Squid cache information including version and uptime"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "squid-cache-manager.get-cache-info"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-cache-counters
+          description: "Get detailed Squid performance counters and hit rates"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "squid-cache-manager.get-cache-counters"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-cache-utilization
+          description: "Get current cache utilization and capacity statistics"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "squid-cache-manager.get-cache-utilization"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-memory-usage
+          description: "Get Squid memory allocation and pool statistics"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "squid-cache-manager.get-memory-usage"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-active-requests
+          description: "List all currently active HTTP requests being processed"
+          hints:
+            readOnly: true
+            idempotent: false
+          call: "squid-cache-manager.get-active-requests"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-connections
+          description: "Get all active client and server connections"
+          hints:
+            readOnly: true
+            idempotent: false
+          call: "squid-cache-manager.get-connections"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-cache-config
+          description: "Get current Squid runtime configuration"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "squid-cache-manager.get-cache-config"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-acl-list
+          description: "Get all defined Squid access control lists"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "squid-cache-manager.get-acl-list"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-cache-objects
+          description: "List objects currently stored in the Squid cache"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "squid-cache-manager.get-cache-objects"
+          with:
+            pattern: "tools.pattern"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: reconfigure-squid
+          description: "Trigger Squid to reload its configuration file"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "squid-cache-manager.reconfigure-squid"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: rotate-log-files
+          description: "Trigger Squid log file rotation"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "squid-cache-manager.rotate-log-files"
+          outputParameters:
+            - type: object
+              mapping: "$."

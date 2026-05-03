@@ -1,0 +1,160 @@
+vocabulary:
+  name: Squid Proxy Vocabulary
+  description: >-
+    Key terms, concepts, and operational vocabulary for the Squid caching proxy.
+    Covers cache management, access control, protocol handling, and operational
+    concepts used in Squid configuration and administration.
+  version: "6.x"
+  created: "2026-05-02"
+  modified: "2026-05-02"
+  tags:
+    - Squid
+    - Caching Proxy
+    - HTTP Proxy
+    - Network
+
+  terms:
+    - term: ACL
+      label: Access Control List
+      description: >-
+        A named set of conditions that objects (requests, responses, connections)
+        can match against. ACLs form the basis of Squid's access control system
+        and can match on IP addresses, domain names, URL patterns, time of day,
+        user identities, and many other criteria.
+      category: Access Control
+
+    - term: Cache Hit
+      label: Cache Hit
+      description: >-
+        A request whose response was served directly from the Squid cache without
+        contacting the origin server. Hits reduce latency and bandwidth. Types
+        include TCP_HIT (from disk), MEM_HIT (from memory), and TCP_REFRESH_HIT
+        (revalidated with origin).
+      category: Caching
+
+    - term: Cache Miss
+      label: Cache Miss
+      description: >-
+        A request where no valid cached copy exists and Squid must forward the
+        request to the origin server. The response may then be stored in the
+        cache for future requests.
+      category: Caching
+
+    - term: Cacheable Object
+      label: Cacheable Object
+      description: >-
+        A response that Squid can store in the cache for reuse. Cacheability
+        is determined by HTTP cache-control headers, Squid configuration directives,
+        and refresh patterns. Authenticated responses, POST responses, and
+        responses with no-store directives are typically not cacheable.
+      category: Caching
+
+    - term: Cache Manager
+      label: Cache Manager
+      description: >-
+        A built-in Squid interface accessible via HTTP at the /squid-internal-mgr
+        path. Provides operational visibility into cache performance, active
+        connections, configuration, and administrative functions.
+      category: Administration
+
+    - term: cachemgr.cgi
+      label: Cache Manager CGI
+      description: >-
+        A CGI wrapper that provides a web-based interface to the cache manager,
+        allowing administrators to view statistics and perform operations via
+        a web browser without direct command-line access.
+      category: Administration
+
+    - term: Forwarding Proxy
+      label: Forwarding Proxy
+      description: >-
+        A proxy configuration where Squid sits between clients and the internet,
+        forwarding client requests to origin servers and caching responses.
+        The most common Squid deployment mode.
+      category: Architecture
+
+    - term: Reverse Proxy
+      label: Reverse Proxy
+      description: >-
+        A proxy configuration where Squid sits in front of origin servers,
+        caching and serving responses on behalf of the server. Used for
+        web acceleration and content delivery.
+      category: Architecture
+
+    - term: Intercept Proxy
+      label: Intercept Proxy
+      description: >-
+        A transparent proxy where client traffic is intercepted by network
+        infrastructure (router/firewall) and redirected to Squid without
+        requiring client configuration.
+      category: Architecture
+
+    - term: ICP
+      label: Internet Cache Protocol
+      description: >-
+        A UDP-based protocol used by Squid cache peers to query each other
+        about cached objects before forwarding requests. Enables cache hierarchy
+        and cooperative caching between multiple Squid instances.
+      category: Protocols
+
+    - term: HTCP
+      label: Hyper Text Caching Protocol
+      description: >-
+        An alternative to ICP that provides richer cache peer communication,
+        including cache digest requests and notifications. Operates over UDP.
+      category: Protocols
+
+    - term: SMP
+      label: Symmetric Multi-Processing
+      description: >-
+        Squid's multi-process architecture where multiple worker processes
+        share the cache store and handle client requests in parallel,
+        utilizing multiple CPU cores.
+      category: Architecture
+
+    - term: Store ID
+      label: Store ID
+      description: >-
+        A unique identifier used by Squid to store and retrieve cached objects.
+        Can be customized via store_id helpers to enable sharing cached content
+        across different URL variations.
+      category: Caching
+
+    - term: Refresh Pattern
+      label: Refresh Pattern
+      description: >-
+        A squid.conf directive that defines caching behavior for URLs matching
+        a regular expression, controlling minimum and maximum cache lifetimes
+        and percentage-based expiry.
+      category: Configuration
+
+    - term: ssl-bump
+      label: SSL Bump
+      description: >-
+        A Squid feature that intercepts and decrypts HTTPS connections to
+        enable content inspection, filtering, and caching of TLS traffic.
+        Requires a CA certificate installed on client devices.
+      category: Security
+
+    - term: WCCP
+      label: Web Cache Communication Protocol
+      description: >-
+        A protocol that enables Cisco routers to redirect web traffic to
+        Squid cache servers transparently, used for large-scale intercept
+        proxy deployments.
+      category: Protocols
+
+    - term: NAT
+      label: Network Address Translation Interception
+      description: >-
+        Linux-based transparent proxy interception using iptables NAT rules
+        to redirect client HTTP traffic to Squid without client configuration.
+      category: Architecture
+
+    - term: Peer Cache
+      label: Peer Cache
+      description: >-
+        Another Squid cache server configured as a sibling or parent in a
+        cache hierarchy. Peers are queried via ICP/HTCP before making
+        direct origin server connections.
+      category: Architecture

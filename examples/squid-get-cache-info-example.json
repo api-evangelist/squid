@@ -1,0 +1,16 @@
+{
+  "example": "Get Cache Information",
+  "operation": "getCacheInfo",
+  "request": {
+    "method": "GET",
+    "url": "http://localhost:3128/squid-internal-mgr/info",
+    "headers": {
+      "Authorization": "Basic Y2FjaGVtZ3I6c2VjcmV0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "contentType": "text/plain",
+    "body": "Squid Object Cache: Version 6.9\nService Name: squid\nStart Time:\tThu, 02 May 2026 08:00:00 GMT\nCurrent Time:\tThu, 02 May 2026 14:30:00 GMT\nConnection information for squid:\n\tNumber of clients accessing cache:\t42\n\tNumber of HTTP requests received:\t152847\n\tNumber of ICP messages received:\t0\n\tNumber of ICP messages sent:\t0\n\tNumber of queued ICP replies:\t0\nCache information for squid:\n\tRequest Hit Ratios:\t5min: 68.2%, 60min: 64.5%\n\tByte Hit Ratios:\t5min: 71.3%, 60min: 68.1%\n\tRequests forwarded to origin servers:\t22431\n\tRequests with errors:\t183"
+  }
+}

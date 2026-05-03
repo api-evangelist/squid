@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.squid-cache.org/schemas/cache-stats",
+  "title": "Squid Cache Statistics",
+  "description": "Schema representing Squid cache performance statistics including request counts, hit rates, and byte counters",
+  "type": "object",
+  "properties": {
+    "squid_version": {
+      "type": "string",
+      "description": "Squid version string"
+    },
+    "start_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Squid process start time"
+    },
+    "current_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Current server time"
+    },
+    "connection_attempts": {
+      "type": "integer",
+      "description": "Total connection attempts since startup"
+    },
+    "successful_connections": {
+      "type": "integer",
+      "description": "Total successful connections"
+    },
+    "average_connection_duration": {
+      "type": "number",
+      "description": "Average connection duration in seconds"
+    },
+    "cache_hits": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "description": "Total cache hits"
+        },
+        "memory": {
+          "type": "integer",
+          "description": "Hits served from memory cache"
+        },
+        "disk": {
+          "type": "integer",
+          "description": "Hits served from disk cache"
+        },
+        "hit_ratio": {
+          "type": "number",
+          "description": "Cache hit ratio as decimal (0.0-1.0)"
+        }
+      }
+    },
+    "request_counts": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer"
+        },
+        "http": {
+          "type": "integer"
+        },
+        "https": {
+          "type": "integer"
+        },
+        "ftp": {
+          "type": "integer"
+        }
+      }
+    },
+    "byte_counts": {
+      "type": "object",
+      "properties": {
+        "bytes_from_clients": {
+          "type": "integer",
+          "description": "Total bytes received from clients"
+        },
+        "bytes_to_clients": {
+          "type": "integer",
+          "description": "Total bytes sent to clients"
+        },
+        "bytes_from_servers": {
+          "type": "integer",
+          "description": "Total bytes received from origin servers"
+        },
+        "bytes_to_servers": {
+          "type": "integer",
+          "description": "Total bytes sent to origin servers"
+        }
+      }
+    },
+    "memory_usage": {
+      "type": "object",
+      "properties": {
+        "total_accounted": {
+          "type": "integer",
+          "description": "Total accounted memory in bytes"
+        },
+        "max_resident": {
+          "type": "integer",
+          "description": "Maximum resident set size in bytes"
+        },
+        "current_resident": {
+          "type": "integer",
+          "description": "Current resident set size in bytes"
+        }
+      }
+    },
+    "store_directory": {
+      "type": "object",
+      "properties": {
+        "directory": {
+          "type": "string",
+          "description": "Path to cache store directory"
+        },
+        "current_objects": {
+          "type": "integer",
+          "description": "Number of objects currently in the store"
+        },
+        "current_capacity": {
+          "type": "number",
+          "description": "Percentage of cache capacity used"
+        }
+      }
+    }
+  }
+}

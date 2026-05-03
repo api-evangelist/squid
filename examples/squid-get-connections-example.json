@@ -1,0 +1,16 @@
+{
+  "example": "Get Active Connections",
+  "operation": "getConnections",
+  "request": {
+    "method": "GET",
+    "url": "http://localhost:3128/squid-internal-mgr/connections",
+    "headers": {
+      "Authorization": "Basic Y2FjaGVtZ3I6c2VjcmV0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "contentType": "text/plain",
+    "body": "Active Connections:\n\nFD 12, type=HTTP, timeout 86400\n\tLocal: 127.0.0.1:3128\n\tRemote: 192.168.1.10:52341\n\tStatus: Waiting for Request\n\tBytes read: 1024, written: 45678\n\tDuration: 3.2 seconds\n\nFD 18, type=HTTP, timeout 86400\n\tLocal: 127.0.0.1:3128\n\tRemote: 192.168.1.15:48902\n\tStatus: Processing Request\n\tBytes read: 512, written: 0\n\tDuration: 0.8 seconds"
+  }
+}

@@ -1,0 +1,51 @@
+extends: spectral:oas
+rules:
+  squid-operation-summary-title-case:
+    description: All operation summaries must use Title Case
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^([A-Z][a-z0-9]*\\s?)+$"
+
+  squid-operationid-kebab-case:
+    description: operationId must use camelCase
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  squid-tags-required:
+    description: Every operation must have at least one tag
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: truthy
+
+  squid-no-empty-descriptions:
+    description: Descriptions must not be empty
+    severity: warn
+    given: "$.paths[*][*].description"
+    then:
+      function: truthy
+
+  squid-response-200-required:
+    description: All GET operations must define a 200 response
+    severity: error
+    given: "$.paths[*].get"
+    then:
+      field: responses.200
+      function: truthy
+
+  squid-paths-lowercase:
+    description: Path segments must use lowercase characters
+    severity: warn
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(\\/[a-z0-9_{}\\-]*)+$"
