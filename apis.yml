@@ -39,7 +39,7 @@ apis:
     properties:
       - type: Documentation
         url: http://www.squid-cache.org/Doc/
-      - type: Getting Started
+      - type: GettingStarted
         url: http://www.squid-cache.org/Doc/config/
       - type: OpenAPI
         url: >-
@@ -66,16 +66,16 @@ apis:
     properties:
       - type: Documentation
         url: http://www.squid-cache.org/Doc/config/acl/
-      - type: Getting Started
+      - type: GettingStarted
         url: http://www.squid-cache.org/Doc/config/
 common:
   - type: Website
     url: http://www.squid-cache.org/
   - type: Documentation
     url: http://www.squid-cache.org/Doc/
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/squid-cache
-  - type: Changelog
+  - type: ChangeLog
     url: http://www.squid-cache.org/Versions/
   - type: FAQ
     url: http://wiki.squid-cache.org/SquidFaq
