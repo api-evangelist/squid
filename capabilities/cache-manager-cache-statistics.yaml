@@ -1,0 +1,272 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Squid Cache Manager API — Cache Statistics
+  description: 'Squid Cache Manager API — Cache Statistics. 7 operations. Lead operation: Get 5-Minute Statistics. Self-contained
+    Naftiko capability covering one Squid business surface.'
+  tags:
+  - Squid
+  - Cache Statistics
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SQUID_API_KEY: SQUID_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cache-manager-cache-statistics
+    baseUri: http://localhost:3128/squid-internal-mgr
+    description: Squid Cache Manager API — Cache Statistics business capability. Self-contained, no shared references.
+    resources:
+    - name: 5min
+      path: /5min
+      operations:
+      - name: get5minstatistics
+        method: GET
+        description: Get 5-Minute Statistics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 60min
+      path: /60min
+      operations:
+      - name: get60minstatistics
+        method: GET
+        description: Get 60-Minute Statistics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: counters
+      path: /counters
+      operations:
+      - name: getcachecounters
+        method: GET
+        description: Get Cache Counters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: info
+      path: /info
+      operations:
+      - name: getcacheinfo
+        method: GET
+        description: Get Cache Information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: objects
+      path: /objects
+      operations:
+      - name: getcacheobjects
+        method: GET
+        description: List Cached Objects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: pattern
+          in: query
+          type: string
+          description: URL pattern filter (glob)
+    - name: store_digest
+      path: /store_digest
+      operations:
+      - name: getstoredigest
+        method: GET
+        description: Get Cache Store Digest
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: utilization
+      path: /utilization
+      operations:
+      - name: getcacheutilization
+        method: GET
+        description: Get Cache Utilization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.SQUID_USER}}'
+      password: '{{env.SQUID_PASS}}'
+  exposes:
+  - type: rest
+    namespace: cache-manager-cache-statistics-rest
+    port: 8080
+    description: REST adapter for Squid Cache Manager API — Cache Statistics. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/5min
+      name: 5min
+      description: REST surface for 5min.
+      operations:
+      - method: GET
+        name: get5minstatistics
+        description: Get 5-Minute Statistics
+        call: cache-manager-cache-statistics.get5minstatistics
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/60min
+      name: 60min
+      description: REST surface for 60min.
+      operations:
+      - method: GET
+        name: get60minstatistics
+        description: Get 60-Minute Statistics
+        call: cache-manager-cache-statistics.get60minstatistics
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/counters
+      name: counters
+      description: REST surface for counters.
+      operations:
+      - method: GET
+        name: getcachecounters
+        description: Get Cache Counters
+        call: cache-manager-cache-statistics.getcachecounters
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/info
+      name: info
+      description: REST surface for info.
+      operations:
+      - method: GET
+        name: getcacheinfo
+        description: Get Cache Information
+        call: cache-manager-cache-statistics.getcacheinfo
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/objects
+      name: objects
+      description: REST surface for objects.
+      operations:
+      - method: GET
+        name: getcacheobjects
+        description: List Cached Objects
+        call: cache-manager-cache-statistics.getcacheobjects
+        with:
+          pattern: rest.pattern
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/store-digest
+      name: store-digest
+      description: REST surface for store_digest.
+      operations:
+      - method: GET
+        name: getstoredigest
+        description: Get Cache Store Digest
+        call: cache-manager-cache-statistics.getstoredigest
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/utilization
+      name: utilization
+      description: REST surface for utilization.
+      operations:
+      - method: GET
+        name: getcacheutilization
+        description: Get Cache Utilization
+        call: cache-manager-cache-statistics.getcacheutilization
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cache-manager-cache-statistics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Squid Cache Manager API — Cache Statistics. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-5-minute-statistics
+      description: Get 5-Minute Statistics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cache-manager-cache-statistics.get5minstatistics
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-60-minute-statistics
+      description: Get 60-Minute Statistics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cache-manager-cache-statistics.get60minstatistics
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-cache-counters
+      description: Get Cache Counters
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cache-manager-cache-statistics.getcachecounters
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-cache-information
+      description: Get Cache Information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cache-manager-cache-statistics.getcacheinfo
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-cached-objects
+      description: List Cached Objects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cache-manager-cache-statistics.getcacheobjects
+      with:
+        pattern: tools.pattern
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-cache-store-digest
+      description: Get Cache Store Digest
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cache-manager-cache-statistics.getstoredigest
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-cache-utilization
+      description: Get Cache Utilization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cache-manager-cache-statistics.getcacheutilization
+      outputParameters:
+      - type: object
+        mapping: $.

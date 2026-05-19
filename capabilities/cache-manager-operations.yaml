@@ -1,0 +1,135 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Squid Cache Manager API — Operations
+  description: 'Squid Cache Manager API — Operations. 3 operations. Lead operation: Reconfigure Squid. Self-contained Naftiko
+    capability covering one Squid business surface.'
+  tags:
+  - Squid
+  - Operations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SQUID_API_KEY: SQUID_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cache-manager-operations
+    baseUri: http://localhost:3128/squid-internal-mgr
+    description: Squid Cache Manager API — Operations business capability. Self-contained, no shared references.
+    resources:
+    - name: reconfigure
+      path: /reconfigure
+      operations:
+      - name: reconfiguresquid
+        method: GET
+        description: Reconfigure Squid
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rotate
+      path: /rotate
+      operations:
+      - name: rotatelogfiles
+        method: GET
+        description: Rotate Log Files
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: shutdown
+      path: /shutdown
+      operations:
+      - name: shutdownsquid
+        method: GET
+        description: Shutdown Squid
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.SQUID_USER}}'
+      password: '{{env.SQUID_PASS}}'
+  exposes:
+  - type: rest
+    namespace: cache-manager-operations-rest
+    port: 8080
+    description: REST adapter for Squid Cache Manager API — Operations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/reconfigure
+      name: reconfigure
+      description: REST surface for reconfigure.
+      operations:
+      - method: GET
+        name: reconfiguresquid
+        description: Reconfigure Squid
+        call: cache-manager-operations.reconfiguresquid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rotate
+      name: rotate
+      description: REST surface for rotate.
+      operations:
+      - method: GET
+        name: rotatelogfiles
+        description: Rotate Log Files
+        call: cache-manager-operations.rotatelogfiles
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/shutdown
+      name: shutdown
+      description: REST surface for shutdown.
+      operations:
+      - method: GET
+        name: shutdownsquid
+        description: Shutdown Squid
+        call: cache-manager-operations.shutdownsquid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cache-manager-operations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Squid Cache Manager API — Operations. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: reconfigure-squid
+      description: Reconfigure Squid
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cache-manager-operations.reconfiguresquid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: rotate-log-files
+      description: Rotate Log Files
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cache-manager-operations.rotatelogfiles
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: shutdown-squid
+      description: Shutdown Squid
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cache-manager-operations.shutdownsquid
+      outputParameters:
+      - type: object
+        mapping: $.
