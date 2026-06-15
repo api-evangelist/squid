@@ -1,0 +1,230 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Squid Cache Manager API",
+    "version": "6.x"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cache Statistics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Cache Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/info"
+          },
+          "docs": "Returns general information about the Squid process including version, start time, current time, and basic statistics about requests served, cache hits, and memory usage."
+        },
+        {
+          "info": {
+            "name": "Get Cache Counters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/counters"
+          },
+          "docs": "Returns detailed performance counters including request counts, cache hit rates, byte counts, DNS statistics, ICP statistics, and HTTP status breakdowns."
+        },
+        {
+          "info": {
+            "name": "Get 5-Minute Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/5min"
+          },
+          "docs": "Returns rolling 5-minute averages for cache activity metrics."
+        },
+        {
+          "info": {
+            "name": "Get 60-Minute Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/60min"
+          },
+          "docs": "Returns rolling 60-minute averages for cache activity metrics."
+        },
+        {
+          "info": {
+            "name": "Get Cache Utilization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/utilization"
+          },
+          "docs": "Returns current cache utilization including object count, capacity used, and store capacity statistics."
+        },
+        {
+          "info": {
+            "name": "Get Cache Store Digest",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/store_digest"
+          },
+          "docs": "Returns the cache store digest, a compact representation of cached objects used for ICP/HTCP peer communication."
+        },
+        {
+          "info": {
+            "name": "List Cached Objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/objects",
+            "params": [
+              {
+                "name": "pattern",
+                "value": "",
+                "type": "query",
+                "description": "URL pattern filter (glob)"
+              }
+            ]
+          },
+          "docs": "Returns a list of objects currently stored in the cache including their URLs, sizes, creation times, and hit counts."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Memory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Memory Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/mem"
+          },
+          "docs": "Returns detailed memory allocation statistics including pool allocations, heap usage, and per-component memory breakdown."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Active Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/active_requests"
+          },
+          "docs": "Returns a list of all currently active HTTP requests being processed by Squid, including client IP, request method, URL, and elapsed time."
+        },
+        {
+          "info": {
+            "name": "Get Active Connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/connections"
+          },
+          "docs": "Returns all active client and server connections with their state, duration, and bytes transferred."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Cache Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/config"
+          },
+          "docs": "Returns the current Squid configuration (squid.conf) as loaded at startup or last reload. Sensitive values such as LDAP passwords are redacted."
+        },
+        {
+          "info": {
+            "name": "Get ACL List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/acl_list"
+          },
+          "docs": "Returns all defined access control lists (ACLs) and their current membership, including IP ranges, domain lists, and time specifications."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Shutdown Squid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/shutdown"
+          },
+          "docs": "Initiates a graceful shutdown of the Squid process. Requires authentication and appropriate ACL access."
+        },
+        {
+          "info": {
+            "name": "Reconfigure Squid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/reconfigure"
+          },
+          "docs": "Triggers Squid to reload its configuration file (equivalent to SIGHUP). New configuration takes effect without restarting the process."
+        },
+        {
+          "info": {
+            "name": "Rotate Log Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/rotate"
+          },
+          "docs": "Triggers Squid to rotate its log files (access.log, cache.log, store.log). Equivalent to sending SIGUSR1."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
