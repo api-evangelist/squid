@@ -1,0 +1,13 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/squid-cache-manager-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BasicAuth
+  type: http
+  scheme: basic
+  description: Cache manager password configured via cachemgr_passwd in squid.conf
+  sources:
+  - openapi/squid-cache-manager-openapi.yml

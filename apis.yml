@@ -63,6 +63,10 @@ apis:
       - type: GettingStarted
         url: http://www.squid-cache.org/Doc/config/
 common:
+  - type: DomainSecurity
+    url: security/squid-domain-security.yml
+  - type: Authentication
+    url: authentication/squid-authentication.yml
   - type: Website
     url: http://www.squid-cache.org/
   - type: Documentation
