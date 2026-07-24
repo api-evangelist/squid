@@ -1,0 +1,68 @@
+openapi: 3.1.0
+info:
+  title: Squid Cache Manager Cache Statistics Operations API
+  description: The Squid Cache Manager is a built-in HTTP management interface that exposes internal statistics, cache operations, and runtime state via HTTP requests. It provides endpoints for retrieving cache statistics, managing connections, viewing counters, and performing cache operations. Access is typically restricted to localhost or authorized IP ranges.
+  version: 6.x
+  contact:
+    name: Squid Project
+    url: http://www.squid-cache.org/Support/
+  license:
+    name: GNU General Public License v2
+    url: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+servers:
+- url: http://localhost:3128/squid-internal-mgr
+  description: Local Squid Cache Manager (default port)
+security:
+- BasicAuth: []
+tags:
+- name: Operations
+  description: Cache operational commands
+paths:
+  /shutdown:
+    get:
+      operationId: shutdownSquid
+      summary: Shutdown Squid
+      description: Initiates a graceful shutdown of the Squid process. Requires authentication and appropriate ACL access.
+      tags:
+      - Operations
+      responses:
+        '200':
+          description: Shutdown initiated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /reconfigure:
+    get:
+      operationId: reconfigureSquid
+      summary: Reconfigure Squid
+      description: Triggers Squid to reload its configuration file (equivalent to SIGHUP). New configuration takes effect without restarting the process.
+      tags:
+      - Operations
+      responses:
+        '200':
+          description: Reconfiguration initiated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /rotate:
+    get:
+      operationId: rotateLogFiles
+      summary: Rotate Log Files
+      description: Triggers Squid to rotate its log files (access.log, cache.log, store.log). Equivalent to sending SIGUSR1.
+      tags:
+      - Operations
+      responses:
+        '200':
+          description: Log rotation initiated
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: Cache manager password configured via cachemgr_passwd in squid.conf

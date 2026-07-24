@@ -1,0 +1,40 @@
+openapi: 3.1.0
+info:
+  title: Squid Cache Manager Cache Statistics Memory API
+  description: The Squid Cache Manager is a built-in HTTP management interface that exposes internal statistics, cache operations, and runtime state via HTTP requests. It provides endpoints for retrieving cache statistics, managing connections, viewing counters, and performing cache operations. Access is typically restricted to localhost or authorized IP ranges.
+  version: 6.x
+  contact:
+    name: Squid Project
+    url: http://www.squid-cache.org/Support/
+  license:
+    name: GNU General Public License v2
+    url: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+servers:
+- url: http://localhost:3128/squid-internal-mgr
+  description: Local Squid Cache Manager (default port)
+security:
+- BasicAuth: []
+tags:
+- name: Memory
+  description: Memory allocation and pool statistics
+paths:
+  /mem:
+    get:
+      operationId: getMemoryUsage
+      summary: Get Memory Usage
+      description: Returns detailed memory allocation statistics including pool allocations, heap usage, and per-component memory breakdown.
+      tags:
+      - Memory
+      responses:
+        '200':
+          description: Memory usage report
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: Cache manager password configured via cachemgr_passwd in squid.conf

@@ -1,0 +1,54 @@
+openapi: 3.1.0
+info:
+  title: Squid Cache Manager Cache Statistics Connections API
+  description: The Squid Cache Manager is a built-in HTTP management interface that exposes internal statistics, cache operations, and runtime state via HTTP requests. It provides endpoints for retrieving cache statistics, managing connections, viewing counters, and performing cache operations. Access is typically restricted to localhost or authorized IP ranges.
+  version: 6.x
+  contact:
+    name: Squid Project
+    url: http://www.squid-cache.org/Support/
+  license:
+    name: GNU General Public License v2
+    url: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+servers:
+- url: http://localhost:3128/squid-internal-mgr
+  description: Local Squid Cache Manager (default port)
+security:
+- BasicAuth: []
+tags:
+- name: Connections
+  description: Active connection and request management
+paths:
+  /active_requests:
+    get:
+      operationId: getActiveRequests
+      summary: Get Active Requests
+      description: Returns a list of all currently active HTTP requests being processed by Squid, including client IP, request method, URL, and elapsed time.
+      tags:
+      - Connections
+      responses:
+        '200':
+          description: Active requests list
+          content:
+            text/plain:
+              schema:
+                type: string
+  /connections:
+    get:
+      operationId: getConnections
+      summary: Get Active Connections
+      description: Returns all active client and server connections with their state, duration, and bytes transferred.
+      tags:
+      - Connections
+      responses:
+        '200':
+          description: Active connections list
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: Cache manager password configured via cachemgr_passwd in squid.conf
