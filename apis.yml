@@ -5,7 +5,20 @@ description: >-
   bandwidth management. It supports HTTP, HTTPS, FTP, and other protocols, providing caching proxy features, access
   control lists, SSL/TLS inspection, and web content filtering for enterprises and internet service providers.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/squid.png
 tags:
   - Caching Proxy
   - Proxy
@@ -18,50 +31,108 @@ created: '2026-03-27'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: squid:squid-cache-manager
-    name: Squid Cache Manager API
-    description: >-
-      The Squid Cache Manager is a built-in HTTP management interface that exposes internal statistics, cache
-      operations, and runtime configuration via HTTP requests. It provides endpoints for retrieving cache statistics,
-      managing active connections, viewing access control lists, and performing cache operations such as reconfigure and
-      log rotation.
-    humanURL: http://www.squid-cache.org/Doc/config/cachemgr_passwd/
-    baseURL: http://localhost:3128/squid-internal-mgr
-    tags:
-      - Caching Proxy
-      - Cache Manager
-      - HTTP Proxy
-      - Web Cache
-    properties:
-      - type: Documentation
-        url: http://www.squid-cache.org/Doc/
-      - type: GettingStarted
-        url: http://www.squid-cache.org/Doc/config/
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/squid/refs/heads/main/openapi/squid-cache-manager-openapi.yml
-      - type: JSONSchema
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/squid/refs/heads/main/json-schema/squid-cache-stats-schema.json
-    contact:
-      - FN: Squid Project
-        url: http://www.squid-cache.org/Support/
-  - aid: squid:squid-access-control
-    name: Squid Access Control Configuration API
-    description: >-
-      Squid provides extensive access control configuration through its squid.conf file and runtime reload capabilities.
-      The access control system supports ACLs for IP addresses, domain names, URL patterns, user authentication,
-      time-of-day restrictions, and MIME type filtering.
-    humanURL: http://www.squid-cache.org/Doc/config/acl/
-    baseURL: http://localhost:3128/squid-internal-mgr
-    tags:
-      - Access Control
-      - Configuration
-      - HTTP Proxy
-    properties:
-      - type: Documentation
-        url: http://www.squid-cache.org/Doc/config/acl/
-      - type: GettingStarted
-        url: http://www.squid-cache.org/Doc/config/
+- aid: squid:squid-access-control
+  name: Squid Access Control Configuration API
+  description: >-
+    Squid provides extensive access control configuration through its squid.conf file and runtime reload
+    capabilities. The access control system supports ACLs for IP addresses, domain names, URL patterns,
+    user authentication, time-of-day restrictions, and MIME type filtering.
+  humanURL: http://www.squid-cache.org/Doc/config/acl/
+  baseURL: http://localhost:3128/squid-internal-mgr
+  tags:
+  - Access Control
+  - Configuration
+  - HTTP Proxy
+  properties:
+  - type: Documentation
+    url: http://www.squid-cache.org/Doc/config/acl/
+  - type: GettingStarted
+    url: http://www.squid-cache.org/Doc/config/
+- aid: squid:squid-cache-statistics-api
+  name: Squid Cache Statistics API
+  description: Cache performance metrics and counters
+  humanURL: http://www.squid-cache.org/Doc/config/cachemgr_passwd/
+  baseURL: http://localhost:3128/squid-internal-mgr
+  tags:
+  - Cache Statistics
+  properties:
+  - type: OpenAPI
+    url: openapi/squid-cache-statistics-api-openapi.yml
+  - type: Documentation
+    url: http://www.squid-cache.org/Doc/
+  - type: GettingStarted
+    url: http://www.squid-cache.org/Doc/config/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/squid/refs/heads/main/json-schema/squid-cache-stats-schema.json
+- aid: squid:squid-configuration-api
+  name: Squid Configuration API
+  description: Runtime configuration and ACL information
+  humanURL: http://www.squid-cache.org/Doc/config/cachemgr_passwd/
+  baseURL: http://localhost:3128/squid-internal-mgr
+  tags:
+  - Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/squid-configuration-api-openapi.yml
+  - type: Documentation
+    url: http://www.squid-cache.org/Doc/
+  - type: GettingStarted
+    url: http://www.squid-cache.org/Doc/config/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/squid/refs/heads/main/json-schema/squid-cache-stats-schema.json
+- aid: squid:squid-connections-api
+  name: Squid Connections API
+  description: Active connection and request management
+  humanURL: http://www.squid-cache.org/Doc/config/cachemgr_passwd/
+  baseURL: http://localhost:3128/squid-internal-mgr
+  tags:
+  - Connections
+  properties:
+  - type: OpenAPI
+    url: openapi/squid-connections-api-openapi.yml
+  - type: Documentation
+    url: http://www.squid-cache.org/Doc/
+  - type: GettingStarted
+    url: http://www.squid-cache.org/Doc/config/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/squid/refs/heads/main/json-schema/squid-cache-stats-schema.json
+- aid: squid:squid-memory-api
+  name: Squid Memory API
+  description: Memory allocation and pool statistics
+  humanURL: http://www.squid-cache.org/Doc/config/cachemgr_passwd/
+  baseURL: http://localhost:3128/squid-internal-mgr
+  tags:
+  - Memory
+  properties:
+  - type: OpenAPI
+    url: openapi/squid-memory-api-openapi.yml
+  - type: Documentation
+    url: http://www.squid-cache.org/Doc/
+  - type: GettingStarted
+    url: http://www.squid-cache.org/Doc/config/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/squid/refs/heads/main/json-schema/squid-cache-stats-schema.json
+- aid: squid:squid-operations-api
+  name: Squid Operations API
+  description: Cache operational commands
+  humanURL: http://www.squid-cache.org/Doc/config/cachemgr_passwd/
+  baseURL: http://localhost:3128/squid-internal-mgr
+  tags:
+  - Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/squid-operations-api-openapi.yml
+  - type: Documentation
+    url: http://www.squid-cache.org/Doc/
+  - type: GettingStarted
+    url: http://www.squid-cache.org/Doc/config/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/squid/refs/heads/main/json-schema/squid-cache-stats-schema.json
 common:
   - type: AgenticAccess
     url: agentic-access/squid-agentic-access.yml
