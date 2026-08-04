@@ -1,0 +1,22 @@
+{
+  "provider": "squid",
+  "sources": [
+    "squid-cache-statistics-api-openapi.yml",
+    "squid-configuration-api-openapi.yml",
+    "squid-connections-api-openapi.yml",
+    "squid-memory-api-openapi.yml",
+    "squid-operations-api-openapi.yml"
+  ],
+  "outputs": [
+    "squid-cache-statistics-api-openapi.yml",
+    "squid-configuration-api-openapi.yml",
+    "squid-connections-api-openapi.yml",
+    "squid-memory-api-openapi.yml",
+    "squid-operations-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,308 @@
+openapi: 3.1.0
+info:
+  title: Squid Cache Manager API
+  description: >-
+    The Squid Cache Manager is a built-in HTTP management interface that
+    exposes internal statistics, cache operations, and runtime state via HTTP
+    requests. It provides endpoints for retrieving cache statistics, managing
+    connections, viewing counters, and performing cache operations. Access
+    is typically restricted to localhost or authorized IP ranges.
+  version: "6.x"
+  contact:
+    name: Squid Project
+    url: http://www.squid-cache.org/Support/
+  license:
+    name: GNU General Public License v2
+    url: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+servers:
+  - url: http://localhost:3128/squid-internal-mgr
+    description: Local Squid Cache Manager (default port)
+
+security:
+  - BasicAuth: []
+
+tags:
+  - name: Cache Statistics
+    description: Cache performance metrics and counters
+  - name: Connections
+    description: Active connection and request management
+  - name: Memory
+    description: Memory allocation and pool statistics
+  - name: Configuration
+    description: Runtime configuration and ACL information
+  - name: Operations
+    description: Cache operational commands
+
+paths:
+  /info:
+    get:
+      operationId: getCacheInfo
+      summary: Get Cache Information
+      description: >-
+        Returns general information about the Squid process including version,
+        start time, current time, and basic statistics about requests served,
+        cache hits, and memory usage.
+      tags:
+        - Cache Statistics
+      responses:
+        '200':
+          description: Cache information
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: Plain text cache information report
+        '401':
+          description: Unauthorized — cache manager password required
+
+  /counters:
+    get:
+      operationId: getCacheCounters
+      summary: Get Cache Counters
+      description: >-
+        Returns detailed performance counters including request counts, cache
+        hit rates, byte counts, DNS statistics, ICP statistics, and HTTP
+        status breakdowns.
+      tags:
+        - Cache Statistics
+      responses:
+        '200':
+          description: Performance counters
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+
+  /5min:
+    get:
+      operationId: get5MinStatistics
+      summary: Get 5-Minute Statistics
+      description: Returns rolling 5-minute averages for cache activity metrics.
+      tags:
+        - Cache Statistics
+      responses:
+        '200':
+          description: 5-minute rolling statistics
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /60min:
+    get:
+      operationId: get60MinStatistics
+      summary: Get 60-Minute Statistics
+      description: Returns rolling 60-minute averages for cache activity metrics.
+      tags:
+        - Cache Statistics
+      responses:
+        '200':
+          description: 60-minute rolling statistics
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /utilization:
+    get:
+      operationId: getCacheUtilization
+      summary: Get Cache Utilization
+      description: >-
+        Returns current cache utilization including object count, capacity
+        used, and store capacity statistics.
+      tags:
+        - Cache Statistics
+      responses:
+        '200':
+          description: Cache utilization report
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /mem:
+    get:
+      operationId: getMemoryUsage
+      summary: Get Memory Usage
+      description: >-
+        Returns detailed memory allocation statistics including pool allocations,
+        heap usage, and per-component memory breakdown.
+      tags:
+        - Memory
+      responses:
+        '200':
+          description: Memory usage report
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /active_requests:
+    get:
+      operationId: getActiveRequests
+      summary: Get Active Requests
+      description: >-
+        Returns a list of all currently active HTTP requests being processed
+        by Squid, including client IP, request method, URL, and elapsed time.
+      tags:
+        - Connections
+      responses:
+        '200':
+          description: Active requests list
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /connections:
+    get:
+      operationId: getConnections
+      summary: Get Active Connections
+      description: >-
+        Returns all active client and server connections with their state,
+        duration, and bytes transferred.
+      tags:
+        - Connections
+      responses:
+        '200':
+          description: Active connections list
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /config:
+    get:
+      operationId: getCacheConfig
+      summary: Get Cache Configuration
+      description: >-
+        Returns the current Squid configuration (squid.conf) as loaded at
+        startup or last reload. Sensitive values such as LDAP passwords are
+        redacted.
+      tags:
+        - Configuration
+      responses:
+        '200':
+          description: Current Squid configuration
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /acl_list:
+    get:
+      operationId: getACLList
+      summary: Get ACL List
+      description: >-
+        Returns all defined access control lists (ACLs) and their current
+        membership, including IP ranges, domain lists, and time specifications.
+      tags:
+        - Configuration
+      responses:
+        '200':
+          description: ACL list
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /store_digest:
+    get:
+      operationId: getStoreDigest
+      summary: Get Cache Store Digest
+      description: >-
+        Returns the cache store digest, a compact representation of cached
+        objects used for ICP/HTCP peer communication.
+      tags:
+        - Cache Statistics
+      responses:
+        '200':
+          description: Cache store digest
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+
+  /objects:
+    get:
+      operationId: getCacheObjects
+      summary: List Cached Objects
+      description: >-
+        Returns a list of objects currently stored in the cache including
+        their URLs, sizes, creation times, and hit counts.
+      tags:
+        - Cache Statistics
+      parameters:
+        - name: pattern
+          in: query
+          description: URL pattern filter (glob)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of cached objects
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /shutdown:
+    get:
+      operationId: shutdownSquid
+      summary: Shutdown Squid
+      description: >-
+        Initiates a graceful shutdown of the Squid process. Requires
+        authentication and appropriate ACL access.
+      tags:
+        - Operations
+      responses:
+        '200':
+          description: Shutdown initiated
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /reconfigure:
+    get:
+      operationId: reconfigureSquid
+      summary: Reconfigure Squid
+      description: >-
+        Triggers Squid to reload its configuration file (equivalent to
+        SIGHUP). New configuration takes effect without restarting the process.
+      tags:
+        - Operations
+      responses:
+        '200':
+          description: Reconfiguration initiated
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /rotate:
+    get:
+      operationId: rotateLogFiles
+      summary: Rotate Log Files
+      description: >-
+        Triggers Squid to rotate its log files (access.log, cache.log,
+        store.log). Equivalent to sending SIGUSR1.
+      tags:
+        - Operations
+      responses:
+        '200':
+          description: Log rotation initiated
+          content:
+            text/plain:
+              schema:
+                type: string
+
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: Cache manager password configured via cachemgr_passwd in squid.conf
