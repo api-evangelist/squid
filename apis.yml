@@ -29,7 +29,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/squid/refs/heads/main/apis.yml
 created: '2026-03-27'
 modified: '2026-05-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: squid:squid-access-control
   name: Squid Access Control Configuration API
