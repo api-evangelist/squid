@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Squid Cache Manager Cache Statistics Connections API",
+    "version": "6.x"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Active Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/active_requests"
+          },
+          "docs": "Returns a list of all currently active HTTP requests being processed by Squid, including client IP, request method, URL, and elapsed time."
+        },
+        {
+          "info": {
+            "name": "Get Active Connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/connections"
+          },
+          "docs": "Returns all active client and server connections with their state, duration, and bytes transferred."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,201 @@
+{
+  "item": [
+    {
+      "id": "57c8dd89-4fde-4f11-8fd3-ea6f0749efdc",
+      "name": "Configuration",
+      "description": {
+        "content": "Runtime configuration and ACL information",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c9fc984f-bfc2-419d-aef6-c481782a433f",
+          "name": "Get Cache Configuration",
+          "request": {
+            "name": "Get Cache Configuration",
+            "description": {
+              "content": "Returns the current Squid configuration (squid.conf) as loaded at startup or last reload. Sensitive values such as LDAP passwords are redacted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b797b7ed-1ab9-4846-bc9e-c9c2f90c4885",
+              "name": "Current Squid configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "960b8a96-2dfe-49ca-af81-1ac84a9b7faa",
+          "name": "Get ACL List",
+          "request": {
+            "name": "Get ACL List",
+            "description": {
+              "content": "Returns all defined access control lists (ACLs) and their current membership, including IP ranges, domain lists, and time specifications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "acl_list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "07ccd23d-9e0d-4e62-ac80-d3e4156f55d1",
+              "name": "ACL list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "acl_list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3128/squid-internal-mgr",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ff986664-c581-470d-a53e-42761751a005",
+    "name": "Squid Cache Manager Cache Statistics Configuration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Squid Cache Manager is a built-in HTTP management interface that exposes internal statistics, cache operations, and runtime state via HTTP requests. It provides endpoints for retrieving cache statistics, managing connections, viewing counters, and performing cache operations. Access is typically restricted to localhost or authorized IP ranges.\n\nContact Support:\n Name: Squid Project",
+      "type": "text/plain"
+    }
+  }
+}

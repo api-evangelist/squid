@@ -1,0 +1,279 @@
+{
+  "item": [
+    {
+      "id": "3514232c-d98c-4ab8-9ad2-f4c30e798085",
+      "name": "Operations",
+      "description": {
+        "content": "Cache operational commands",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "144a3ad8-67c0-4fa6-9b76-aeae9f3452ff",
+          "name": "Shutdown Squid",
+          "request": {
+            "name": "Shutdown Squid",
+            "description": {
+              "content": "Initiates a graceful shutdown of the Squid process. Requires authentication and appropriate ACL access.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shutdown"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ec85966-27f8-48b8-8f68-9c603427e1d2",
+              "name": "Shutdown initiated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shutdown"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3058bb74-6afd-49d2-ba48-b91944692718",
+          "name": "Reconfigure Squid",
+          "request": {
+            "name": "Reconfigure Squid",
+            "description": {
+              "content": "Triggers Squid to reload its configuration file (equivalent to SIGHUP). New configuration takes effect without restarting the process.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reconfigure"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b2ef691b-b6ac-49a0-8ccd-2712f26e56d4",
+              "name": "Reconfiguration initiated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reconfigure"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b5ee48b-4591-4129-a8bd-4415ad7a1ce9",
+          "name": "Rotate Log Files",
+          "request": {
+            "name": "Rotate Log Files",
+            "description": {
+              "content": "Triggers Squid to rotate its log files (access.log, cache.log, store.log). Equivalent to sending SIGUSR1.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rotate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d8037d4-063e-40d1-b1b0-0f504e3ca2d5",
+              "name": "Log rotation initiated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3128/squid-internal-mgr",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "93d9036d-4136-43b2-8b2e-7ef9042a7256",
+    "name": "Squid Cache Manager Cache Statistics Operations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Squid Cache Manager is a built-in HTTP management interface that exposes internal statistics, cache operations, and runtime state via HTTP requests. It provides endpoints for retrieving cache statistics, managing connections, viewing counters, and performing cache operations. Access is typically restricted to localhost or authorized IP ranges.\n\nContact Support:\n Name: Squid Project",
+      "type": "text/plain"
+    }
+  }
+}

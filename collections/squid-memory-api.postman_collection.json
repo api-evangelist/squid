@@ -1,0 +1,123 @@
+{
+  "item": [
+    {
+      "id": "6565b0f6-2bc0-4f0b-a002-c512befd3e7f",
+      "name": "Memory",
+      "description": {
+        "content": "Memory allocation and pool statistics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6fc26858-1785-4088-9238-1d2c0a74c607",
+          "name": "Get Memory Usage",
+          "request": {
+            "name": "Get Memory Usage",
+            "description": {
+              "content": "Returns detailed memory allocation statistics including pool allocations, heap usage, and per-component memory breakdown.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mem"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "28a02659-7e5b-4b4b-9068-a0957ba9b270",
+              "name": "Memory usage report",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3128/squid-internal-mgr",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d6b6aa63-aaf6-4414-85b4-042cfd4b14e2",
+    "name": "Squid Cache Manager Cache Statistics Memory API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Squid Cache Manager is a built-in HTTP management interface that exposes internal statistics, cache operations, and runtime state via HTTP requests. It provides endpoints for retrieving cache statistics, managing connections, viewing counters, and performing cache operations. Access is typically restricted to localhost or authorized IP ranges.\n\nContact Support:\n Name: Squid Project",
+      "type": "text/plain"
+    }
+  }
+}

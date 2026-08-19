@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Squid Cache Manager Cache Statistics Memory API",
+    "version": "6.x"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Memory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Memory Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/mem"
+          },
+          "docs": "Returns detailed memory allocation statistics including pool allocations, heap usage, and per-component memory breakdown."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

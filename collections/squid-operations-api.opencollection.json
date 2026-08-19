@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Squid Cache Manager Cache Statistics Operations API",
+    "version": "6.x"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Shutdown Squid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/shutdown"
+          },
+          "docs": "Initiates a graceful shutdown of the Squid process. Requires authentication and appropriate ACL access."
+        },
+        {
+          "info": {
+            "name": "Reconfigure Squid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/reconfigure"
+          },
+          "docs": "Triggers Squid to reload its configuration file (equivalent to SIGHUP). New configuration takes effect without restarting the process."
+        },
+        {
+          "info": {
+            "name": "Rotate Log Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/rotate"
+          },
+          "docs": "Triggers Squid to rotate its log files (access.log, cache.log, store.log). Equivalent to sending SIGUSR1."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

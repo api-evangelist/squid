@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Squid Cache Manager Cache Statistics API",
+    "version": "6.x"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cache Statistics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Cache Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/info"
+          },
+          "docs": "Returns general information about the Squid process including version, start time, current time, and basic statistics about requests served, cache hits, and memory usage."
+        },
+        {
+          "info": {
+            "name": "Get Cache Counters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/counters"
+          },
+          "docs": "Returns detailed performance counters including request counts, cache hit rates, byte counts, DNS statistics, ICP statistics, and HTTP status breakdowns."
+        },
+        {
+          "info": {
+            "name": "Get 5-Minute Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/5min"
+          },
+          "docs": "Returns rolling 5-minute averages for cache activity metrics."
+        },
+        {
+          "info": {
+            "name": "Get 60-Minute Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/60min"
+          },
+          "docs": "Returns rolling 60-minute averages for cache activity metrics."
+        },
+        {
+          "info": {
+            "name": "Get Cache Utilization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/utilization"
+          },
+          "docs": "Returns current cache utilization including object count, capacity used, and store capacity statistics."
+        },
+        {
+          "info": {
+            "name": "Get Cache Store Digest",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/store_digest"
+          },
+          "docs": "Returns the cache store digest, a compact representation of cached objects used for ICP/HTCP peer communication."
+        },
+        {
+          "info": {
+            "name": "List Cached Objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3128/squid-internal-mgr/objects",
+            "params": [
+              {
+                "name": "pattern",
+                "value": "",
+                "type": "query",
+                "description": "URL pattern filter (glob)"
+              }
+            ]
+          },
+          "docs": "Returns a list of objects currently stored in the cache including their URLs, sizes, creation times, and hit counts."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

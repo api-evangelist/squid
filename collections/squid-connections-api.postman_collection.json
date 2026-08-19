@@ -1,0 +1,201 @@
+{
+  "item": [
+    {
+      "id": "19f5a524-1d76-4c0d-9901-2f8cf839e356",
+      "name": "Connections",
+      "description": {
+        "content": "Active connection and request management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a51b9785-4b39-44c2-a622-c1ae0dc15e03",
+          "name": "Get Active Requests",
+          "request": {
+            "name": "Get Active Requests",
+            "description": {
+              "content": "Returns a list of all currently active HTTP requests being processed by Squid, including client IP, request method, URL, and elapsed time.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "active_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5474e25f-6c1c-4ce0-b06c-f7a06b691d02",
+              "name": "Active requests list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "active_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "020a584b-5486-4757-b30a-1bc4527a6917",
+          "name": "Get Active Connections",
+          "request": {
+            "name": "Get Active Connections",
+            "description": {
+              "content": "Returns all active client and server connections with their state, duration, and bytes transferred.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "51ca4d1c-d330-4e3a-a984-4562e5c46677",
+              "name": "Active connections list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3128/squid-internal-mgr",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "559cf904-5856-433d-aa21-e0c0ce52ff21",
+    "name": "Squid Cache Manager Cache Statistics Connections API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Squid Cache Manager is a built-in HTTP management interface that exposes internal statistics, cache operations, and runtime state via HTTP requests. It provides endpoints for retrieving cache statistics, managing connections, viewing counters, and performing cache operations. Access is typically restricted to localhost or authorized IP ranges.\n\nContact Support:\n Name: Squid Project",
+      "type": "text/plain"
+    }
+  }
+}
