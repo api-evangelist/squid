@@ -121,7 +121,8 @@ apis:
   description: Cache operational commands
   humanURL: http://www.squid-cache.org/Doc/config/cachemgr_passwd/
   baseURL: http://localhost:3128/squid-internal-mgr
-  tags:
+  tags: []
+  tags_raw:
   - Operations
   properties:
   - type: OpenAPI
