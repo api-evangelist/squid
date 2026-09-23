@@ -1,11 +1,7 @@
 {
   "provider": "squid",
   "sources": [
-    "squid-cache-statistics-api-openapi.yml",
-    "squid-configuration-api-openapi.yml",
-    "squid-connections-api-openapi.yml",
-    "squid-memory-api-openapi.yml",
-    "squid-operations-api-openapi.yml"
+    "_original/squid-cache-manager-openapi.yml"
   ],
   "outputs": [
     "squid-cache-statistics-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "squid-cache-manager-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "squid-cache-statistics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "squid-configuration-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "squid-connections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "squid-memory-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "squid-operations-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
