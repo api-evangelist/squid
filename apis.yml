@@ -148,6 +148,12 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/squid/refs/heads/main/json-schema/squid-cache-stats-schema.json
 common:
+  - type: Plans
+    url: plans/squid-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/squid-rate-limits.yml
+  - type: FinOps
+    url: finops/squid-finops.yml
   - type: AgenticAccess
     url: agentic-access/squid-agentic-access.yml
   - type: DomainSecurity
